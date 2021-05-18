@@ -150,7 +150,91 @@ let object3 = object2;
 // console.log("0 === false", 0 === false);
 
 
-console.log("1 >= 2", 1 >= 2);
-console.log("2 >= 2", 2 >= 2);
+// console.log("1 >= 2", 1 >= 2);
+// console.log("2 >= 2", 2 >= 2);
+//
+// console.log("1 <= 2", 1 <= 2);
 
-console.log("1 <= 2", 1 <= 2);
+// console.log(
+//     'object1 == object2 || object1 == object3',
+//     (object1 == object2) || (object1 == object3)
+// );
+//
+// console.log(
+//     'true || true',
+//     true || true
+// );
+
+// console.log(
+//     'object1 == object2 || object2 == object3',
+//     (object1 == object2) || (object2 == object3)
+// );
+// console.log(
+//     'true && true',
+//     true && true
+// );
+// console.log(
+//     'object3 == object2 && object2 === object3',
+//     (object3 == object2) && (object2 === object3)
+// );
+
+let userName = '';
+let helloSentence = '';
+
+
+// if (userName) {
+//     console.log('Hello User name', userName);
+// } else if (helloSentence) {
+//     console.log('warunek nie spełniony');
+// } else if (false) {
+//     console.log('warunek else if nie spełniony');
+//
+// } else {
+//     console.log('ostateczny warunek !')
+// }
+//
+// if (userName) {
+//     helloSentence = 'Hello '+ userName
+// } else {
+//     helloSentence = 'Hello user!'
+// }
+
+// helloSentence = (userName || helloSentence)? 'Hello ' + userName : 'Hello user!';
+
+// console.log('helloSentence', helloSentence);
+
+switch (userName) {
+    case 'Sylwia':
+        console.log('Cześć Sylwia!');
+        helloSentence = 'Hello Sylwia';
+        break;
+    case 'Kacper':
+        console.log('Cześć Kacper!');
+        a += b;
+        a++;
+        break;
+    case 'Mateusz':
+        console.log('Cześć Mateusz!');
+        break;
+    case 'Kamila':
+        console.log('Cześć Kamila!');
+        break;
+    default:
+        // console.log('default case');
+        break;
+}
+
+for (let i = 0; i <= 10; i++) {
+    // console.log('i', i);
+}
+
+// console.log('kiedy się wykona ten console.log?');
+
+for (let i = 0; i < names.length; i++) {
+    if (typeof multipleTypeArray[i] == "number") {
+        console.log('Mam liczbę !!!')
+    }
+    console.log('name from names array', names[i]);
+}
+
+// console.log('index = 4', names[4]);
