@@ -264,7 +264,7 @@ let newMyArray = myArray.slice(); // copy array
 let copiedMyArray = myArray.slice(0, 2); // copy elements start from index, second argument is equal number of copied elements
 
 
-
+// nothing to comment
 console.log('newMyArray', newMyArray);
 console.log('copiedMyArray', copiedMyArray);
 console.log('myArray', myArray);
