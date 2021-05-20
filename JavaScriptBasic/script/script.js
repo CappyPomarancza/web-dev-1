@@ -230,11 +230,43 @@ for (let i = 0; i <= 10; i++) {
 
 // console.log('kiedy się wykona ten console.log?');
 
-for (let i = 0; i < names.length; i++) {
-    if (typeof multipleTypeArray[i] == "number") {
-        console.log('Mam liczbę !!!')
-    }
-    console.log('name from names array', names[i]);
-}
+// for (let i = 0; i < names.length; i++) {
+//     if (typeof multipleTypeArray[i] == "number") {
+//         console.log('Mam liczbę !!!')
+//     }
+//     console.log('name from names array', names[i]);
+// }
 
 // console.log('index = 4', names[4]);
+
+// let myArray = [];
+let myArray = new Array(3);
+myArray[0] = 'Mateusz';
+myArray[1] = 'Sylwia';
+myArray[2] = 'Kamila';
+myArray[3] = 'Marcin';
+myArray[4] = 'Zbyszek';
+myArray[5] = 'Ewelina';
+// myArray.length = 2;
+// myArray.length = myArray.length - 1;
+myArray.pop(); // delete last array element and returns that element;
+// console.log('name.length', name.length);
+myArray.push('Kacper'); // add new element to the end of an array and return array length
+
+myArray.shift(); // delete first array element and returns that element;
+
+myArray.unshift('Baltazar'); // add new element to the beginning of an array and return array length
+
+myArray.splice(0, 1); // delete elements start from index, second argument equal number of deleted elements
+
+let newMyArray = myArray.slice(); // copy array
+
+let copiedMyArray = myArray.slice(0, 2); // copy elements start from index, second argument is equal number of copied elements
+
+
+
+console.log('newMyArray', newMyArray);
+console.log('copiedMyArray', copiedMyArray);
+console.log('myArray', myArray);
+console.log('myArray.length', myArray.length);
+
