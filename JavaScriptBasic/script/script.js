@@ -230,11 +230,74 @@ for (let i = 0; i <= 10; i++) {
 
 // console.log('kiedy się wykona ten console.log?');
 
-for (let i = 0; i < names.length; i++) {
-    if (typeof multipleTypeArray[i] == "number") {
-        console.log('Mam liczbę !!!')
-    }
-    console.log('name from names array', names[i]);
-}
+// for (let i = 0; i < names.length; i++) {
+//     if (typeof multipleTypeArray[i] == "number") {
+//         console.log('Mam liczbę !!!')
+//     }
+//     console.log('name from names array', names[i]);
+// }
 
 // console.log('index = 4', names[4]);
+
+
+
+                            //   FUNCTION //
+
+                            //  ANONYMOUS FUNCTION //
+
+// (function () {
+//     let sum = 1 + 3;
+//     console.log('sum', sum);
+// })();   // ()THIS IS A CALL A ANONYMOUS FUNCTION
+
+            //  NAMED FUNCTION //
+
+// function add() {
+//     let sum = 1 + 3;
+//     console.log('sum', sum);
+// };
+//
+// add();            // CALL NAMED FUNCTION //
+
+
+// function add(a, b) {
+//
+//     let sum1 = a + b;
+//     console.log('sum', sum1);
+// };
+//
+// add(9, 80); // CALL NAMED FUNCTION  WITH PARAMETERS//
+
+
+//  ANONYMOUS FUNCTION  ASSIGNED TO VARIABLE//
+
+// let myAddVariable = function (x, y) {
+//     let sum = x + y;
+//     console.log('My add variable function', sum)
+// };
+//
+// myAddVariable(9, 9);
+
+let sum = 0;
+
+// const add = function (a, b) {
+//    sum = a + b;
+// };
+//
+// let resultAdd = add(1,1);
+//
+// console.log('resultAdd', resultAdd);
+//
+// console.log('sum', sum);
+
+
+
+                // FAT ARROW FUNCTION //
+
+const add = (a, b) => {
+    return sum = a + b;
+};
+
+console.log('add', add);
+
+console.log('add()', add(1,2));
