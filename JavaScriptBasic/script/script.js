@@ -265,8 +265,48 @@ let copiedMyArray = myArray.slice(0, 2); // copy elements start from index, seco
 
 
 // nothing to comment
-console.log('newMyArray', newMyArray);
-console.log('copiedMyArray', copiedMyArray);
-console.log('myArray', myArray);
-console.log('myArray.length', myArray.length);
+// console.log('newMyArray', newMyArray);
+// console.log('copiedMyArray', copiedMyArray);
+// console.log('myArray', myArray);
+// console.log('myArray.length', myArray.length);
 
+let arr_1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,
+            23,24,25,26,27,28,29,30];
+
+let sum = 0;
+
+for (let i = 0; i <= 30; i++) {
+    if (i !=0 && i % 2 == 0) {
+        // console.log('i', i);
+    }
+}
+
+// console.log('sum', sum);
+
+
+
+
+
+                               // FUNCTIONS //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// (function () { console.log('test anonymous function')})();
+
+
+function add() {
+    // console.log('hellow from add');
+}
