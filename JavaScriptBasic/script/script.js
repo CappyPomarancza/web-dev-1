@@ -282,31 +282,3 @@ for (let i = 0; i <= 30; i++) {
 }
 
 // console.log('sum', sum);
-
-
-
-
-
-                               // FUNCTIONS //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// (function () { console.log('test anonymous function')})();
-
-
-function add() {
-    // console.log('hellow from add');
-}
