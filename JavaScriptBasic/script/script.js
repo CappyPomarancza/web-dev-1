@@ -298,6 +298,97 @@ const add = (a, b) => {
     return sum = a + b;
 };
 
-console.log('add', add);
+// console.log('add', add);
 
-console.log('add()', add(1,2));
+// console.log('add()', add(1,2));
+
+            //   HIGHER ORDER FUNCTION //
+
+const order = [
+    {
+        name: 'frytki',
+        price: 15,
+        vege: true
+    },
+    {
+        name: 'piwo',
+        price: 10,
+        vege: true
+    },
+    {
+        name: 'dorsz',
+        price: 28,
+        vege: false
+    },
+    {
+        name: 'kompot',
+        price: 7,
+        vege: true
+    },
+    {
+        name: 'pomidorowa',
+        price: 9,
+        vege: false
+    },
+    {
+        name: 'hamburger',
+        price: 30,
+        vege: false
+    },
+    {
+        name: 'stek',
+        price: 45,
+        vege: false
+    }
+];
+
+for (let i = 0; i < order.length; i ++) {
+    // console.log(order[i].name)
+}
+
+let test = order.push(
+    {name: 'herbata', price: 5, vege: true}
+)
+
+let orderMapResult = order.map((element,index,array) => {
+    return {
+        name: element.name,
+        price: element.price + 5
+    };
+})
+
+// console.log('orderMapResult',orderMapResult);
+// console.log('order',order);
+let orderFilterResultByFor = []
+for (let i = 0; i < order.length; i ++) {
+    if (order[i].price < 20) {
+        orderFilterResultByFor.push(order[i])
+    }
+}
+// console.log('orderFilterResultByFor', orderFilterResultByFor)
+let orderFilterResultByFilter = order.filter((el)=> {
+    return el.price < 20 && el.vege;
+});
+// console.log('orderFilterResultByFilter', orderFilterResultByFilter);
+
+let totalPrice = 0;
+for (let i = 0; i < order.length; i ++) {
+    totalPrice = totalPrice + order[i].price
+}
+
+console.log('total price', totalPrice);
+// let sum1 = 0;
+// let totalPriceResultReduce = order.reduce((el, i, arr) => {
+//     return sum1 + el.price;
+// },0)
+//
+// console.log('sum', sum);
+
+let resultReduce = order
+    .filter(el => {return el.vege === true})
+    .map(el => { return el.price })
+    .reduce((prevValue, currValue) => {
+       return prevValue + currValue
+    },0)
+
+console.log('resultReduce ', resultReduce)
