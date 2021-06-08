@@ -173,27 +173,76 @@ function renderAppetizerSubMenu() {
 
 // renderAppetizerSubMenu();
 
-function renderMenu() {
-    menu.map( item => {
-        const menuItem =  document.createElement('a');
-        menuItem.className = "list-group-item list-group-item-action pointer menu-list-item";
-        const menuItemText = document.createTextNode(item.name);
-        menuItem.appendChild(menuItemText);
-        const menuItemActionContainer = document.createElement('div');
-        menuItemActionContainer.className = 'item-action-container';
+let clickedMenuButtonId = 'home-button-item';
+let isOrderMode = false;
 
-        const menuItemPrice = document.createElement('button');
-        menuItemPrice.className = 'btn btn-disabled';
-        menuItemPrice.innerText = item.price;
+const handleNavButtonClick = (event) => {
+    document.getElementById(clickedMenuButtonId).classList.remove('active'); // usuwam klasę active z poprzednio klikniętego elementu
+    clickedMenuButtonId = event.target.id + '-item';                                // tworze identyfiktor rodzica klikniętego elementu
+    document.getElementById(clickedMenuButtonId).classList.add('active');           // nadaje klase active klikniętemu elementowi
 
+    switch (clickedMenuButtonId) {
+        case 'home-button-item':
+            document.getElementById('main-page').classList.remove('display-none');
+            document.getElementById('menu-page').classList.add('display-none');
+
+            break;
+        case 'menu-button-item':
+            document.getElementById('menu-page').classList.remove('display-none');
+            document.getElementById('main-page').classList.add('display-none');
+
+            break;
+    }
+
+};
+
+const createMenuItem = (item) => {
+    const menuItem =  document.createElement('a');
+    menuItem.className = "list-group-item list-group-item-action pointer menu-list-item";
+    const menuItemText = document.createTextNode(item.name);
+    menuItem.appendChild(menuItemText);
+
+    const menuItemActionContainer = createMenuActionContainer(item);
+    menuItem.appendChild(menuItemActionContainer);
+
+    return menuItem;
+};
+
+const handleMenuItemAddCLick = (event) => {
+
+};
+
+const createMenuActionContainer = (item) => {
+    const menuItemActionContainer = document.createElement('div');
+    menuItemActionContainer.className = 'item-action-container';
+
+    const menuItemPrice = document.createElement('button');
+    menuItemPrice.className = 'btn btn-disabled';
+    menuItemPrice.innerText = item.price;
+    menuItemActionContainer.appendChild(menuItemPrice);
+
+
+    if (!isOrderMode) {
         const orderButton = document.createElement('button');
         orderButton.className = 'btn btn-primary';
-        orderButton.innerText = "Add";
+        orderButton.innerText = "Dodaj";
         orderButton.id = item.id;
-
-        menuItemActionContainer.appendChild(menuItemPrice);
+        orderButton.addEventListener('click', handleMenuItemAddCLick);
         menuItemActionContainer.appendChild(orderButton);
-        menuItem.appendChild(menuItemActionContainer);
+    } else {
+        const removeButton = document.createElement('button');
+        removeButton.className = 'btn btn-danger';
+        removeButton.innerText = "Usuń";
+        removeButton.id = item.id;
+        menuItemActionContainer.appendChild(removeButton);
+    }
+
+    return menuItemActionContainer;
+};
+
+function renderMenu() {
+    menu.map( item => {
+        const menuItem = createMenuItem(item);
         document.getElementById(item.type + '-list').appendChild(menuItem);
     })
 }

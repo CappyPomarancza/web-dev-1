@@ -9,3 +9,23 @@
     justify-content: space-between;
     font-weight: bold;
 }
+
+.item-action-container {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.background-container {
+    background: url("../img/pexels-aisha-serafini-5714752.jpg");
+}
+
+.opacity-container {
+    background-color: #f8f8f8;
+    opacity: 0.9;
+    position: relative;
+}
+
+.display-none {
+    display: none;
+}
