@@ -1,4 +1,4 @@
-.menu-list-item{
+.menu-list-item {
     display: flex;
     justify-content: space-between;
 }
@@ -7,13 +7,15 @@
     width: 150px;
     display: flex;
     justify-content: space-between;
-    font-weight: bold;
 }
 
-.item-action-container {
-    width: 150px;
-    display: flex;
-    justify-content: space-between;
+.home-page-content {
+    height: 620px;
+    background: url("../img/home_page.jpg");
+}
+
+.jumbotron {
+    background-color: #f8f8f8;
 }
 
 .background-container {
@@ -24,6 +26,10 @@
     background-color: #f8f8f8;
     opacity: 0.9;
     position: relative;
+}
+
+.order-container {
+    min-height: 99vh;
 }
 
 .display-none {

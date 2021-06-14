@@ -158,93 +158,158 @@ const menu = [
     },
 ];
 
-function renderAppetizerSubMenu() {
-    const appetizersList = menu.filter( menuItem => menuItem.type === 'appetizers'); // tworzenie listy przystawek na podstawie listy menu
-    const appetizersContainer = document.getElementById('appetizers-container'); // tworze zmienna appetizersContainer i przypisuje do niej kontener i podanym indentyfikatorze
+const order = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: {
+        street: '',
+        number:'',
+        postCode: ''
+    },
+    itemList: [],
+    summary: 0,
+};
 
-    appetizersList.map( appetizer => {                                  // dla każdego pojedyńczego elementu tablicy appetizersList
-        const menuItem =  document.createElement('a');         // tworze tag html <a>
-        menuItem.className = "list-group-item list-group-item-action";  // nadaje mu klasy podane w ciągu znaków
-        const menuItemText = document.createTextNode(appetizer.name);   // tworze teks zawierajacy nazwe pojedyńczej przystawki
-        menuItem.appendChild(menuItemText);                             // dodaje tekst do stworzonego wcześniej tagu html <a> tekst </a>
-        appetizersContainer.appendChild(menuItem);                      // dodaje cały skompletowany element <a> do wcześniej złapanego kontenera jako ostatnie dziecko
-    })
-}
-
-// renderAppetizerSubMenu();
-
+const homePage = document.getElementById('home-page');
+const menuPage = document.getElementById('menu-page');
+const galleryPage = document.getElementById('gallery-page');
+const contactPage = document.getElementById('contact-page');
+const orderPage = document.getElementById('order-page');
 let clickedMenuButtonId = 'home-button-item';
-let isOrderMode = false;
 
 const handleNavButtonClick = (event) => {
-    document.getElementById(clickedMenuButtonId).classList.remove('active'); // usuwam klasę active z poprzednio klikniętego elementu
-    clickedMenuButtonId = event.target.id + '-item';                                // tworze identyfiktor rodzica klikniętego elementu
-    document.getElementById(clickedMenuButtonId).classList.add('active');           // nadaje klase active klikniętemu elementowi
+    document.getElementById(clickedMenuButtonId).classList.remove('active');
+    clickedMenuButtonId = event.target.id + '-item'
+    document.getElementById(clickedMenuButtonId).classList.add('active');
 
-    switch (clickedMenuButtonId) {
+    switch(clickedMenuButtonId) {
         case 'home-button-item':
-            document.getElementById('main-page').classList.remove('display-none');
-            document.getElementById('menu-page').classList.add('display-none');
-
+            homePage.classList.remove('display-none');
+            menuPage.classList.add('display-none');
+            galleryPage.classList.add('display-none');
+            contactPage.classList.add('display-none');
+            orderPage.classList.add('display-none');
             break;
         case 'menu-button-item':
-            document.getElementById('menu-page').classList.remove('display-none');
-            document.getElementById('main-page').classList.add('display-none');
-
+            menuPage.classList.remove('display-none');
+            homePage.classList.add('display-none');
+            galleryPage.classList.add('display-none');
+            contactPage.classList.add('display-none');
+            orderPage.classList.add('display-none');
+            break;
+        case 'gallery-button-item':
+            galleryPage.classList.remove('display-none');
+            homePage.classList.add('display-none');
+            menuPage.classList.add('display-none');
+            contactPage.classList.add('display-none');
+            orderPage.classList.add('display-none');
+            break;
+        case 'contact-button-item':
+            contactPage.classList.remove('display-none');
+            homePage.classList.add('display-none');
+            menuPage.classList.add('display-none');
+            galleryPage.classList.add('display-none');
+            orderPage.classList.add('display-none');
+            break;
+        case 'order-button-item':
+            orderPage.classList.remove('display-none');
+            homePage.classList.add('display-none');
+            menuPage.classList.add('display-none');
+            galleryPage.classList.add('display-none');
+            contactPage.classList.add('display-none');
             break;
     }
 
-};
+}
 
-const createMenuItem = (item) => {
-    const menuItem =  document.createElement('a');
-    menuItem.className = "list-group-item list-group-item-action pointer menu-list-item";
-    const menuItemText = document.createTextNode(item.name);
-    menuItem.appendChild(menuItemText);
+const checkOrderListLength = () => {
+    if (order.itemList.length > 0) {
+        // ukryć komunikat
+        document.getElementById('empty-order-list-alert').classList.add('display-none');
+    } else {
+        //pokazać komunikat
+        document.getElementById('empty-order-list-alert').classList.remove('display-none');
+    }
+}
 
-    const menuItemActionContainer = createMenuActionContainer(item);
-    menuItem.appendChild(menuItemActionContainer);
+const renderOrderResume = () => {
+    let orderSummary = 0;
+    order.itemList
+        .map(item => {
+        orderSummary += item.price
+    })
+    document.getElementById('order-summary').innerText = 'Suma ' + orderSummary + 'zł';
+}
 
-    return menuItem;
-};
 
 const handleMenuItemAddCLick = (event) => {
-
+    const clickedItem = menu.find(item => item.id == event.target.id);
+    order.itemList.push(clickedItem);
+    const orderItem = createMenuItem(clickedItem, true);
+    document.getElementById('order-list').appendChild(orderItem);
+    checkOrderListLength();
+    renderOrderResume();
 };
 
-const createMenuActionContainer = (item) => {
-    const menuItemActionContainer = document.createElement('div');
-    menuItemActionContainer.className = 'item-action-container';
+const handleMenuItemRemoveClick = (event) => {
+    const clickedItem = document.getElementById('menu-' + event.target.id);
+    clickedItem.parentNode.removeChild(clickedItem);
+    order.itemList = order.itemList.filter(item => item.id != event.target.id);
+    checkOrderListLength();
+    renderOrderResume();
+}
 
-    const menuItemPrice = document.createElement('button');
-    menuItemPrice.className = 'btn btn-disabled';
-    menuItemPrice.innerText = item.price;
-    menuItemActionContainer.appendChild(menuItemPrice);
+const createActionItemContainer = (item, orderMode) => {
+    const actionItemContainer = document.createElement('div');
+    actionItemContainer.className = 'item-action-container';
+    const priceButton = document.createElement('button');
+    priceButton.className = 'btn btn-disabled';
+    priceButton.innerText = item.price + ' zł';
+    actionItemContainer.appendChild(priceButton);
 
-
-    if (!isOrderMode) {
+    if (!orderMode) {
         const orderButton = document.createElement('button');
         orderButton.className = 'btn btn-primary';
-        orderButton.innerText = "Dodaj";
+        orderButton.innerText = 'Dodaj';
         orderButton.id = item.id;
         orderButton.addEventListener('click', handleMenuItemAddCLick);
-        menuItemActionContainer.appendChild(orderButton);
+        actionItemContainer.appendChild(orderButton);
     } else {
         const removeButton = document.createElement('button');
         removeButton.className = 'btn btn-danger';
-        removeButton.innerText = "Usuń";
+        removeButton.innerText = 'Usuń';
         removeButton.id = item.id;
-        menuItemActionContainer.appendChild(removeButton);
+        removeButton.addEventListener('click', handleMenuItemRemoveClick);
+        actionItemContainer.appendChild(removeButton);
     }
 
-    return menuItemActionContainer;
-};
+    return actionItemContainer;
+}
+
+const createMenuItem = (item, orderMode) => {
+    const menuItem = document.createElement('a');
+    menuItem.className = 'list-group-item list-group-item-action menu-list-item';
+    menuItem.innerText = item.name;
+    menuItem.id = (orderMode ? 'menu-' : 'order-') + item.id;
+
+    // if ( orderMode ) {
+    //     menuItem.id = 'menu-' + item.id;
+    // } else {
+    //     menuItem.id = 'order-' + item.id;
+    // }
+
+    const actionItemContainer = createActionItemContainer(item, orderMode);
+    menuItem.appendChild(actionItemContainer);
+    return menuItem;
+}
+
 
 function renderMenu() {
-    menu.map( item => {
-        const menuItem = createMenuItem(item);
+    menu.map(item => {
+        const menuItem = createMenuItem(item, false);
         document.getElementById(item.type + '-list').appendChild(menuItem);
-    })
+    });
 }
 
 renderMenu();
